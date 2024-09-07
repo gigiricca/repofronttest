@@ -9,9 +9,12 @@ export const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [user, setUser] = useState(null);
 
+    // Obtener la URL base del backend desde las variables de entorno
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
     const login = async (email, password) => {
         try {
-            const response = await axios.post('http://localhost:3000/api/login', { email, password });
+            const response = await axios.post(`${API_BASE_URL}/api/login`, { email, password });
             if (response.status === 200) {
                 const loggedInUser = response.data.user;
                 setUser(loggedInUser);
@@ -36,7 +39,7 @@ export const AuthProvider = ({ children }) => {
             const storedUserId = localStorage.getItem('userId');
             if (storedUserId) {
                 try {
-                    const response = await axios.get(`http://localhost:3000/api/usuarios/${storedUserId}`);
+                    const response = await axios.get(`${API_BASE_URL}/api/usuarios/${storedUserId}`);
                     if (response.status === 200) {
                         const userData = response.data;
                         setUser(userData);

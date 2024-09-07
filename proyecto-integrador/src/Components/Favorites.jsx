@@ -18,8 +18,12 @@ const Favorites = () => {
     };
 
     // Obtener los favoritos al cargar el componente
+
+    // Obtener la URL base del backend desde las variables de entorno
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
     useEffect(() => {
-        axios.get(`http://localhost:3000/api/favoritos/${userData.id}`)
+        axios.get(`${API_BASE_URL}/api/favoritos/${userData.id}`)
             .then(response => {
                 const favoritosData = response.data;
 
@@ -42,7 +46,7 @@ const Favorites = () => {
     // Función para eliminar un favorito del estado global y del backend
     const toggleFavorito = (productoId) => {
         console.log("Datos enviados a la API:", { usuarioId: state.userData.id, productoId });
-        axios.post(`http://localhost:3000/api/favoritos`, { usuarioId: state.userData.id, productoId })
+        axios.post(`${API_BASE_URL}/api/favoritos`, { usuarioId: state.userData.id, productoId })
             .then(response => {
                 console.log(response.data.message);
 

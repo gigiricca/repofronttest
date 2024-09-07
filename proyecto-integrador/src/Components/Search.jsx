@@ -22,11 +22,14 @@ const Search = ({ setSearchTerm, setSearchDate, onSearch }) => {
     const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1);
     const suggestionsListRef = useRef(null); // Referencia para el contenedor de sugerencias
 
+    // Obtener la URL base del backend desde las variables de entorno
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
     useEffect(() => {
         // Fetch all products on mount
         const fetchProducts = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/productos?pageSize=1000');
+                const response = await axios.get(`${API_BASE_URL}/api/productos?pageSize=1000`);
                 setAllProducts(response.data.productos);
             } catch (error) {
                 console.error('Error fetching products:', error);
