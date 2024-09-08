@@ -2,7 +2,7 @@
     "rewrites": [
       {
         "source": "/api/(.*)",
-        "destination": "https://cateringlink.store/api/$1"
+        "destination": "https://cateringlinkbackend-env.eba-xcz9cmwu.us-east-2.elasticbeanstalk.com/api/$1"
       }
     ]
   }
